@@ -1,3 +1,13 @@
 .nav-item.title {
   margin: 10px;
 }
+
+a.nav-item.is-tab:hover {
+  border-bottom: 1px solid #f5f7fa;
+  border-top: 1px solid transparent;
+}
+
+a.nav-item.is-tab.is-active {
+  border-bottom: 4px solid #f5f7fa;
+  border-top: 4px solid transparent;
+}
