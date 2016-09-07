@@ -43,7 +43,7 @@ gulp.task('css', function() {
 
 gulp.task('connect', function() {
     connect.server({
-        root: './app',
+        root: './src',
         livereload: true
     })
 });
@@ -53,7 +53,7 @@ gulp.task('app', function(){
         uri: 'http://localhost:8080',
         app: 'firefox'
     };
-    gulp.src('./app/index.html')
+    gulp.src('./src/index.html')
         .pipe(open(options));
 });
 
