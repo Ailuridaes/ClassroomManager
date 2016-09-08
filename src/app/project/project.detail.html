@@ -1,4 +1,9 @@
-<h3 class="title is-3">Project Name</h3>
+<h3 class="title is-3">
+  <span class="icon is-medium">
+    <a class="fa fa-angle-left" ui-sref="project.list"></a>
+  </span>
+  {{projectDetail.project.name}}
+</h3>
 
 <div class="columns">
   <!-- Assignment List -->
@@ -8,16 +13,16 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Student</th>
+            <th>Project</th>
             <th>Grade</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <!-- Repeat rows for each assignment -->
-          <tr>
-            <td>student</td>
-            <td>grade</td>
+          <!-- Repeat rows for each assigned student -->
+          <tr ng-repeat="assignment in projectDetail.project.assignments">
+            <td>{{assignment.student.firstName}} {{assignment.student.lastName}}</td>
+            <td>{{assignment.grade}}</td>
             <td>buttons</td>
           </tr>
 
@@ -40,9 +45,30 @@
         <button class="button is-gold">Assign</button>
       </p>
     </div>
+
+    <!-- Project Details -->
     <div class="box">
-      <p class="title is-5">Two</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+      <p class="title is-5">Details
+        <span class="icon is-pulled-right" ng-click="projectDetail.toggleEdit();">
+          <a class="fa fa-pencil"></a>
+        </span>
+      </p>
+      <form name="projectForm" ng-submit="projectForm.$valid && projectDetail.updateProject();">
+        <label class="label">Email</label>
+        <p class="control" ng-show="projectDetail.editMode">
+            <input ng-model="projectDetail.editingProject.name" type="text" class="input">
+        </p>
+        <p ng-hide="projectDetail.editMode" class="detail-info">{{projectDetail.project.name}}</p>
+
+        <label class="label">Description</label>
+        <p class="control" ng-show="projectDetail.editMode">
+            <textarea ng-model="projectDetail.editingProject.description" type="text" class="textarea"></textarea>
+        </p>
+        <p ng-hide="projectDetail.editMode" class="detail-info">{{projectDetail.project.description ? projectDetail.project.description : "None"}}</p>
+
+        <input ng-show="projectDetail.editMode" class="button is-gold" type="submit" value="Submit" />
+        <button ng-show="projectDetail.editMode" class="button is-danger is-pulled-right" ng-click="projectDetail.deleteProject();">Delete</button>
     </div>
+
   </div>
 </div>
