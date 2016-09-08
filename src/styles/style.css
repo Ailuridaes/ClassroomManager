@@ -1,3 +1,23 @@
+html, body {
+  height: 100%;
+  background: #ffffff;
+}
+
+/*main colors*/
+.is-gold {
+  background-color: #ffc300;
+  color: #FFFFFF;
+  border-color: transparent;
+}
+
+.is-gold:hover{
+  background-color: #FF9700;
+  color: #FFFFFF;
+  border-color: transparent;
+  border-bottom: 0px solid !important;
+}
+
+/*navigation*/
 .nav-item.title {
   margin: 10px;
 }
@@ -8,6 +28,15 @@ a.nav-item.is-tab:hover {
 }
 
 a.nav-item.is-tab.is-active {
-  border-bottom: 4px solid #f5f7fa;
+  border-bottom: 4px solid #ffc300;
   border-top: 4px solid transparent;
+}
+
+.hero.is-dark a.nav-item.is-active {
+  color: #ffc300;
+}
+
+/*override default form colors*/
+.input:active, .textarea:active, .input:focus, .textarea:focus, .input.is-active, .is-active.textarea, .select select:active, .select select:focus, .select::after {
+  border-color: #ffc300;
 }
