@@ -5,7 +5,7 @@
         .module('app')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = [''];
+    DashboardController.$inject = [];
 
     /* @ngInject */
     function DashboardController() {

@@ -36,7 +36,26 @@ a.nav-item.is-tab.is-active {
   color: #ffc300;
 }
 
+/*back button*/
+.icon a {
+  color: #aeb1b5;
+}
+
+.icon a:hover {
+  color: #ffc300;
+  border-width: 0;
+}
+
 /*override default form colors*/
 .input:active, .textarea:active, .input:focus, .textarea:focus, .input.is-active, .is-active.textarea, .select select:active, .select select:focus, .select::after {
   border-color: #ffc300;
+}
+
+/*tables*/
+td:last-child {
+  text-align: right;
+}
+
+.detail-info {
+  margin-bottom: 0.6em;
 }

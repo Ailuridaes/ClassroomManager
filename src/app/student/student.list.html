@@ -2,7 +2,7 @@
 <div class="container">
   <div class="box">
     <div class="title">Students
-      <a class="button is-gold is-pulled-right">Add</a>
+      <!-- <a class="button is-gold is-pulled-right">Add</a> -->
     </div>
     <table class="table is-striped">
       <thead>
@@ -13,43 +13,43 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Repeat rows for each assignment -->
-        <tr>
-          <td>First Last</td>
-          <td>#</td>
-          <td>details</td>
+        <!-- Repeat rows for each student -->
+        <tr ng-repeat="student in studentList.students | orderBy: 'lastName'">
+          <td>{{student.firstName}} {{student.lastName}}</td>
+          <td>{{student.assignments.length}}</td>
+          <td><a class="button is-gold" ui-sref="student.detail({ studentId: {{student.studentId}}})">Details</a></td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <div class="box">
-    <form>
+    <form name="newStudent" ng-submit="newStudent.$valid && studentList.submitStudent();">
       <p class="title is-5">Add Student</p>
       <div class="columns">
         <div class="column is-half">
           <label class="label">First Name</label>
           <p class="control">
-            <input class="input" type="text">
+            <input ng-model="studentList.newStudent.firstName" class="input" type="text" required>
           </p>
         </div>
         <div class="column is-half">
           <label class="label">Last Name</label>
           <p class="control">
-              <input type="text" class="input">
+              <input ng-model="studentList.newStudent.lastName" type="text" class="input" required>
           </p>
         </div>
       </div>
       <label class="label">Email</label>
       <p class="control">
-          <input type="email" class="input">
+          <input ng-model="studentList.newStudent.emailAddress" type="email" class="input">
       </p>
       <label class="label">Phone Number</label>
       <p class="control">
-          <input type="text" class="input">
+          <input ng-model="studentList.newStudent.telephone" type="text" class="input">
       </p>
 
-      <button class="button is-gold">Add Project</button>
+      <input class="button is-gold" type="submit" value="Add Student" />
     </form>
   </div>
 </div>

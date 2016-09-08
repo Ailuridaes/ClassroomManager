@@ -1,4 +1,9 @@
-<h3 class="title is-3">Student Name</h3>
+<h3 class="title is-3">
+  <span class="icon is-medium">
+    <a class="fa fa-angle-left" ui-sref="student.list"></a>
+  </span>
+  {{studentDetail.student.firstName}} {{studentDetail.student.lastName}}
+</h3>
 
 <div class="columns">
   <!-- Assignment List -->
@@ -15,9 +20,9 @@
         </thead>
         <tbody>
           <!-- Repeat rows for each assignment -->
-          <tr>
-            <td>project</td>
-            <td>grade</td>
+          <tr ng-repeat="assignment in studentDetail.student.assignments">
+            <td>{{assignment.project.name}}</td>
+            <td>{{assignment.grade}}</td>
             <td>buttons</td>
           </tr>
 
@@ -40,9 +45,49 @@
         <button class="button is-gold">Assign</button>
       </p>
     </div>
+
+    <!-- Student Details -->
     <div class="box">
-      <p class="title is-5">Two</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+      <p class="title is-5">Details
+        <span class="icon is-pulled-right" ng-click="studentDetail.toggleEdit();">
+          <a class="fa fa-pencil"></a>
+        </span>
+      </p>
+      <form name="studentForm" ng-submit="studentForm.$valid && studentDetail.updateStudent();">
+        <!-- Student Name -->
+        <div ng-show="studentDetail.editMode" class="columns">
+          <div class="column is-half">
+            <label class="label">First Name</label>
+            <p class="control">
+              <input ng-model="studentDetail.editingStudent.firstName" class="input" type="text" required>
+            </p>
+          </div>
+          <div class="column is-half">
+            <label class="label">Last Name</label>
+            <p class="control">
+                <input ng-model="studentDetail.editingStudent.lastName" type="text" class="input" required>
+            </p>
+          </div>
+        </div>
+        <div ng-hide="studentDetail.editMode">
+          <label class="label">Student Name</label>
+          <p class="detail-info">{{studentDetail.student.firstName}} {{studentDetail.student.lastName}}</p>
+        </div>
+
+        <label class="label">Email</label>
+        <p class="control" ng-show="studentDetail.editMode">
+            <input ng-model="studentDetail.editingStudent.emailAddress" type="email" class="input">
+        </p>
+        <p ng-hide="studentDetail.editMode" class="detail-info">{{studentDetail.student.emailAddress ? studentDetail.student.emailAddress : "None"}}</p>
+
+        <label class="label">Phone Number</label>
+        <p class="control" ng-show="studentDetail.editMode">
+            <input ng-model="studentDetail.editingStudent.telephone" type="text" class="input">
+        </p>
+        <p ng-hide="studentDetail.editMode" class="detail-info">{{studentDetail.student.telephone ? studentDetail.student.telephone : "None"}}</p>
+
+        <input ng-show="studentDetail.editMode" class="button is-gold" type="submit" value="Submit" />
+        <button ng-show="studentDetail.editMode" class="button is-danger is-pulled-right" ng-click="studentDetail.deleteStudent();">Delete</button>
     </div>
   </div>
 </div>
