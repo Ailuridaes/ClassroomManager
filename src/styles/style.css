@@ -18,6 +18,10 @@ html, body {
 }
 
 /*navigation*/
+.logo {
+  font-family: 'Work Sans', sans-serif;
+}
+
 .nav-item.title {
   margin: 10px;
 }

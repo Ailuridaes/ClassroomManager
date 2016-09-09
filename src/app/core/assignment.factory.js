@@ -35,10 +35,9 @@
                 function(res) {
                     // returns added assignment
                     var assignment = angular.fromJson(res.data);
-                    // initialize assignments array for counting functions
                     defer.resolve(assignment);
                 }, function(res) {
-                    defer.reject(res.data.message);
+                    defer.reject(res);
                 }
             );
             return defer.promise;

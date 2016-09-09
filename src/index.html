@@ -8,8 +8,10 @@
 
 
   <script src="https://use.fontawesome.com/ee18ef5990.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:800" rel="stylesheet">
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bulma/css/bulma.css" />
+  <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
   <!-- endbower -->
   <!-- inject:css -->
   <link rel="stylesheet" href="styles/style.css">
@@ -19,7 +21,7 @@
   <section class="hero is-dark is-bold">
     <header class="nav">
       <div class="nav-left">
-        <div class="nav-item title is-2">Classroom Manager</div>
+        <div class="nav-item title is-2 logo">Classroom Manager</div>
         <div class="nav-menu nav-left">
           <a class="nav-item is-tab" ui-sref="dashboard" ui-sref-active="is-active">Dashboard</a>
           <a class="nav-item is-tab" ui-sref="student.list" ui-sref-active="is-active">Students</a>
@@ -35,11 +37,10 @@
 
 
 
-
-
   <!-- bower:js -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
   <!-- endbower -->
   <!-- inject:js -->
   <script src="app/app.js"></script>

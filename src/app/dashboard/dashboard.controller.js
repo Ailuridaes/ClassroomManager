@@ -5,10 +5,10 @@
         .module('app')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['studentFactory', 'projectFactory', 'assignmentFactory'];
+    DashboardController.$inject = ['studentFactory', 'projectFactory', 'assignmentFactory', 'toastr'];
 
     /* @ngInject */
-    function DashboardController(studentFactory, projectFactory, assignmentFactory) {
+    function DashboardController(studentFactory, projectFactory, assignmentFactory, toastr) {
         var vm = this;
         vm.projectCount;
 
