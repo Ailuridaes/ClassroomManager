@@ -12,6 +12,7 @@
         var service = {
             getStudentList: getStudentList,
             getStudent: getStudent,
+            getStudentCount: getStudentCount,
             addStudent: addStudent,
             updateStudent: updateStudent,
             deleteStudent: deleteStudent
@@ -45,6 +46,22 @@
             }).then(
                 function(res) {
                     return angular.fromJson(res.data);
+                }, function(res) {
+                    return res.statusText;
+                }
+            );
+        }
+
+        function getStudentCount() {
+            return $http({
+                method: 'GET',
+                url: studentUrl + '/count',
+                headers: {
+                  'Accept': 'application/json'
+                }
+            }).then(
+                function(res) {
+                    return res.data;
                 }, function(res) {
                     return res.statusText;
                 }

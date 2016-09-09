@@ -12,6 +12,7 @@
         var service = {
             getProjectList: getProjectList,
             getProject: getProject,
+            getProjectCount: getProjectCount,
             addProject: addProject,
             updateProject: updateProject,
             deleteProject: deleteProject
@@ -45,6 +46,22 @@
             }).then(
                 function(res) {
                     return angular.fromJson(res.data);
+                }, function(res) {
+                    return res.statusText;
+                }
+            );
+        }
+
+        function getProjectCount() {
+            return $http({
+                method: 'GET',
+                url: projectUrl + '/count',
+                headers: {
+                  'Accept': 'application/json'
+                }
+            }).then(
+                function(res) {
+                    return res.data;
                 }, function(res) {
                     return res.statusText;
                 }

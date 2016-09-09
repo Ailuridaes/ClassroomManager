@@ -10,7 +10,8 @@
     /* @ngInject */
     function assignmentFactory($http, $q, assignmentUrl) {
         var service = {
-            addAssignment: addAssignment
+            addAssignment: addAssignment,
+            getAssignmentCount: getAssignmentCount
         };
 
         return service;
@@ -40,9 +41,23 @@
                     defer.reject(res.data.message);
                 }
             );
-
             return defer.promise;
+        }
 
+        function getAssignmentCount() {
+            return $http({
+                method: 'GET',
+                url: assignmentUrl + '/count',
+                headers: {
+                  'Accept': 'application/json'
+                }
+            }).then(
+                function(res) {
+                    return res.data;
+                }, function(res) {
+                    return res.statusText;
+                }
+            );
         }
     }
 })();
