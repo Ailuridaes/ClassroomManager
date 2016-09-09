@@ -37,12 +37,11 @@
       <p class="title is-5">Assign Project</p>
       <p class="control has-addons">
         <span class="select">
-          <select>
-            <option>Select dropdown</option>
-            <option>With options</option>
+          <select ng-options="project.name for project in studentDetail.projects" ng-model="studentDetail.assignedProject">
+            <option value="">Select project</option>
           </select>
         </span>
-        <button class="button is-gold">Assign</button>
+        <button class="button is-gold" ng-click="studentDetail.assignProject(studentDetail.assignedProject)">Assign</button>
       </p>
     </div>
 

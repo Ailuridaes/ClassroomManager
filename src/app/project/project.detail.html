@@ -20,7 +20,7 @@
         </thead>
         <tbody>
           <!-- Repeat rows for each assigned student -->
-          <tr ng-repeat="assignment in projectDetail.project.assignments">
+          <tr ng-repeat="assignment in projectDetail.project.assignments | orderBy: 'student.lastName'">
             <td>{{assignment.student.firstName}} {{assignment.student.lastName}}</td>
             <td>{{assignment.grade}}</td>
             <td>buttons</td>
@@ -37,12 +37,11 @@
       <p class="title is-5">Assign Project</p>
       <p class="control has-addons">
         <span class="select">
-          <select>
-            <option>Select dropdown</option>
-            <option>With options</option>
+          <select ng-options="student.firstName + ' ' + student.lastName for student in projectDetail.students | orderBy: 'lastName'" ng-model="projectDetail.assignee">
+            <option value="">Select student</option>
           </select>
         </span>
-        <button class="button is-gold">Assign</button>
+        <button class="button is-gold" ng-click="projectDetail.assignTo(projectDetail.assignee)">Assign</button>
       </p>
     </div>
 

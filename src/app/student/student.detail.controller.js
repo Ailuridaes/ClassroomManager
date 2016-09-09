@@ -5,17 +5,19 @@
         .module('app')
         .controller('StudentDetailController', StudentDetailController);
 
-    StudentDetailController.$inject = ['studentFactory', '$state', '$stateParams'];
+    StudentDetailController.$inject = ['studentFactory', '$state', '$stateParams', 'projectFactory', 'assignmentFactory'];
 
     /* @ngInject */
-    function StudentDetailController(studentFactory, $state, $stateParams) {
+    function StudentDetailController(studentFactory, $state, $stateParams, projectFactory, assignmentFactory) {
         var vm = this;
         vm.student = {};
         vm.editMode = false;
         vm.editingStudent = {};
+        vm.projects = [];
         vm.toggleEdit = toggleEdit;
         vm.updateStudent = updateStudent;
         vm.deleteStudent = deleteStudent;
+        vm.assignProject = assignProject;
 
         activate();
 
@@ -29,6 +31,12 @@
 
                 }
             );
+
+            projectFactory.getProjectList().then(
+                function(data) {
+                    vm.projects = data;
+                }
+            )
         }
 
         function toggleEdit() {
@@ -55,6 +63,15 @@
                     }
                 );
             }
+        }
+
+        function assignProject(project) {
+            assignmentFactory.addAssignment(vm.student, project).then(
+                function(assignment) {
+                    assignment.project = project;
+                    vm.student.assignments.push(assignment);
+                }
+            )
         }
     }
 })();
