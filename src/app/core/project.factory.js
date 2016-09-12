@@ -117,7 +117,7 @@
                 }
             }).then(
                 function(res) {
-                    // returns deleted task
+                    // returns deleted project
                     return angular.fromJson(res.data);
                 }, function(res) {
                     return res.statusText;

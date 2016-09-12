@@ -11,7 +11,9 @@
     function assignmentFactory($http, $q, assignmentUrl) {
         var service = {
             addAssignment: addAssignment,
-            getAssignmentCount: getAssignmentCount
+            getAssignmentCount: getAssignmentCount,
+            updateAssignment: updateAssignment,
+            deleteAssignment: deleteAssignment
         };
 
         return service;
@@ -44,7 +46,9 @@
         }
 
         function getAssignmentCount() {
-            return $http({
+            var defer = $q.defer();
+
+            $http({
                 method: 'GET',
                 url: assignmentUrl + '/count',
                 headers: {
@@ -52,11 +56,66 @@
                 }
             }).then(
                 function(res) {
-                    return res.data;
+                    defer.resolve(res.data);
                 }, function(res) {
-                    return res.statusText;
+                    defer.reject(res);
                 }
             );
+
+            return defer.promise;
+        }
+
+        function updateAssignment(assignment) {
+            var assignmentToSend = {
+                studentId: assignment.studentId,
+                projectId: assignment.projectId,
+                grade: assignment.grade
+            }
+
+            return $http({
+                method: 'PUT',
+                url: assignmentUrl,
+                headers: {
+                  'Accept': 'application/json'
+                },
+                data: assignmentToSend
+            }).then(
+                function(res) {
+                    return;
+                }, function(res) {
+                    return res.statusText;
+                    // res is 404 Not Found if assignmentId does not exist, Bad Request if invalid assignment
+                }
+            );
+        }
+
+        function deleteAssignment(assignment) {
+            var assignmentToSend = {
+                studentId: assignment.studentId,
+                projectId: assignment.projectId,
+                grade: assignment.grade ? assignment.grade : 0
+            }
+
+            var defer = $q.defer();
+
+            $http({
+                method: 'DELETE',
+                url: assignmentUrl,
+                headers: {
+                  'Accept': 'application/json'
+                },
+                data: assignmentToSend
+            }).then(
+                function(res) {
+                    // returns deleted assignment
+                    defer.resolve(angular.fromJson(res.data));
+                }, function(res) {
+                    defer.reject(res.statusText);
+                    // res is 404 Not Found if assignment does not exist
+                }
+            );
+
+            return defer.promise;
         }
     }
 })();

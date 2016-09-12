@@ -10,7 +10,7 @@ html, body {
   border-color: transparent;
 }
 
-.is-gold:hover{
+.is-gold:hover,  .button.is-gold:focus{
   background-color: #FF9700;
   color: #FFFFFF;
   border-color: transparent;

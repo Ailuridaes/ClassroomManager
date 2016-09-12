@@ -22,16 +22,23 @@
           <!-- Repeat rows for each assignment -->
           <tr ng-repeat="assignment in studentDetail.student.assignments">
             <td>{{assignment.project.name}}</td>
-            <td>{{assignment.grade}}</td>
-            <td>buttons</td>
-          </tr>
+            <td>
+            <span ng-hide="assignment.editMode">{{assignment.grade}}</span>
+            <input ng-model="assignment.grade" ng-show="assignment.editMode" type="number" min="1" max="100" class="input">
+            </td>
+            <td>
+              <button class="button is-gold" ng-click="assignment.editMode = true" ng-hide="assignment.editMode">Grade</button>
+              <button class="button is-primary" ng-click="studentDetail.updateAssignment(assignment)" ng-show="assignment.editMode">Submit</button>
+              <button class="button is-danger" ng-click="studentDetail.deleteAssignment(assignment)">Delete</button>
+            </td>
 
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-
+  <!-- Assign Project -->
   <div class="column">
     <div class="box">
       <p class="title is-5">Assign Project</p>
