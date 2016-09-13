@@ -23,8 +23,10 @@
           <tr ng-repeat="assignment in studentDetail.student.assignments">
             <td>{{assignment.project.name}}</td>
             <td>
-            <span ng-hide="assignment.editMode">{{assignment.grade}}</span>
-            <input ng-model="assignment.grade" ng-show="assignment.editMode" type="number" min="1" max="100" class="input">
+              <span ng-hide="assignment.editMode">{{assignment.grade}}</span>
+              <span ng-show="assignment.editMode">
+                <input ng-model="assignment.grade" type="number" min="0" max="100" class="input">
+              </span>
             </td>
             <td>
               <button class="button is-gold" ng-click="assignment.editMode = true" ng-hide="assignment.editMode">Grade</button>

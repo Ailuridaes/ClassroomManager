@@ -18,6 +18,8 @@
         vm.updateProject = updateProject;
         vm.deleteProject = deleteProject;
         vm.assignTo = assignTo;
+        vm.updateAssignment = updateAssignment;
+        vm.deleteAssignment = deleteAssignment;
 
         activate();
 
@@ -79,6 +81,31 @@
                     }
                 }
             )
+        }
+
+        function updateAssignment(assignment) {
+            assignmentFactory.updateAssignment(assignment).then(
+                function() {
+                    assignment.editMode = false;
+                },
+                function(response) {
+                    toastr.warning('Could not update assignment.');
+                }
+            );
+        }
+
+        function deleteAssignment(assignment) {
+            if (confirm("Are you sure you want to delete this assignment?")) {
+                assignmentFactory.deleteAssignment(assignment).then(
+                    function() {
+                        var index = vm.project.assignments.indexOf(assignment);
+                        return index > -1 ? vm.project.assignments.splice(index, 1) : [];
+                    },
+                    function(error) {
+                        toastr.warning('Could not delete assignment.');
+                    }
+                );
+            }
         }
     }
 })();

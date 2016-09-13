@@ -71,8 +71,9 @@
                 projectId: assignment.projectId,
                 grade: assignment.grade
             }
+            var defer = $q.defer();
 
-            return $http({
+            $http({
                 method: 'PUT',
                 url: assignmentUrl,
                 headers: {
@@ -81,19 +82,21 @@
                 data: assignmentToSend
             }).then(
                 function(res) {
-                    return;
+                    defer.resolve();
                 }, function(res) {
-                    return res.statusText;
+                    defer.reject(res.statusText);
                     // res is 404 Not Found if assignmentId does not exist, Bad Request if invalid assignment
                 }
             );
+
+            return defer.promise;
         }
 
         function deleteAssignment(assignment) {
             var assignmentToSend = {
                 studentId: assignment.studentId,
                 projectId: assignment.projectId,
-                grade: assignment.grade ? assignment.grade : 0
+                grade: assignment.grade
             }
 
             var defer = $q.defer();
@@ -102,7 +105,8 @@
                 method: 'DELETE',
                 url: assignmentUrl,
                 headers: {
-                  'Accept': 'application/json'
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
                 },
                 data: assignmentToSend
             }).then(
